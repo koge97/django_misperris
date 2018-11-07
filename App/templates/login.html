@@ -1,8 +1,15 @@
 {% extends 'maqueta.html' %}
 {% block principal %}
 <form method="post">
-     {% csrf_token %}
+    <h1>Iniciar Sesion</h1>
+    <br>
+    {% csrf_token %}
     {{form}}
+    <br>
+    <br>
     <button type="submit">Ingresar</button>
+    <br>
+    <br>
+    <a href="/recovery/">Recuperar Contraseña</a>
 </form>
 {% endblock %}

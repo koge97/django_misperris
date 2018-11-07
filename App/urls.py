@@ -6,4 +6,5 @@ urlpatterns=[
     url(r'^login/$',views.ingresar,name="login"),
     url(r'^$',views.index,name="inicio"),
     url(r'^salir/$',views.salir,name="salir"),
+    url(r'^passwdrcv/$',views.recovery,name="recovery"),
 ]

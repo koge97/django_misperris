@@ -6,6 +6,7 @@
     <button type="submit">Agregar</button>
 </form>
 {%if usuarios %}
+<h1>Gestion de Usuarios</h1>
     {%for u in usuarios%}
     {{u.username}}{{u.email}}
     {%endfor%}

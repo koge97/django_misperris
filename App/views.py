@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import AgregarUsuario, LoginForm
+from .forms import AgregarUsuario, LoginForm, RestablecerPassForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -10,8 +10,9 @@ def index(request):
         return redirect('gestionUsuario')
     else:
         return redirect('login')
-
 @login_required(login_url='login')
+
+#Gestion de Usuarios
 def gestionUsuario(request):
     usuarios=User.objects.all()
     form=AgregarUsuario(request.POST)
@@ -21,7 +22,7 @@ def gestionUsuario(request):
         u.save()
     form=AgregarUsuario()
     return render(request,"GestionarUsuario.html",{'form':form,'usuarios':usuarios})
-
+#Vista del Login
 def ingresar(request):
     form=LoginForm(request.POST or None)
     if form.is_valid():
@@ -31,6 +32,24 @@ def ingresar(request):
             login(request, user)
             return redirect('gestionUsuario')
     return render(request,"login.html",{'form':form})
+
+#Salir
 def salir(request):
     logout(request)
     return redirect("/")
+
+# Recuperacion Contraseña
+def recovery(request):
+    form=RestablecerPassForm(request.POST or None)
+    mensaje=""
+    if form.is_valid():
+        data=form.cleaned_data
+        user=User.objects.get(username=data.get("username"))
+        send_mail(
+                'Recuperación de contraseña',
+                'Haga click aquí para ingresar una nueva contraseña',
+                [user.email],
+                html_message = 'Pulse <a href="http://localhost:8000/restablecer?user='+user.username+'">aquí</a> para restablecer su contraseña.',
+            )
+        mensaje='Correo Enviado a '+user.email
+    return render(request,"passwdrcv.html",{'form':form, 'mensaje':mensaje})
