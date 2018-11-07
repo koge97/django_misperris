@@ -1,0 +1,14 @@
+{% extends 'maqueta.html' %}
+{% block principal %}
+<form method="post">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">Agregar</button>
+</form>
+{%if usuarios %}
+    {%for u in usuarios%}
+    {{u.username}}{{u.email}}
+    {%endfor%}
+{% endif%}
+<a href="{% url 'salir' %}">Salir</a>
+{% endblock %}

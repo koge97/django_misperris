@@ -1,0 +1,136 @@
+* {
+	margin: 0;
+	padding: 0;
+	/*se define como se calcularán los cuadrados en base al ancho y al alto con respecto al padding
+	content-box indica que todo será sin considerar padding o bordes
+	border-box indica que se incluyen en los calculos bordes y padding
+	initial se fija el valor por defecto, depende del dispositivo y el navegador
+	inherit utiliza el valor del contenedor del elemento
+	*/
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+.contenedor {
+	background:#ccc;
+	width:90%;
+	max-width:1000px;
+	margin:auto;
+
+	/* Flexbox */
+	/*display es la propiedad que indica como se verán los elementos
+	En css tradicional se usan tipicamente block, inline none, table, pero existen varias opciones
+	flex indica que el elemento tendrá características responsivas
+	*/
+	display:flex;
+	/*Flex-flow indica como se desplegarán los elementos dentro de un contenedor flex
+	hay dos configuraciones básicas flex-direction y flex-wrap
+	row, row-reverse, column, column-reverse flex directiion
+	nowrap,wrap,wrap-reverse
+	*/
+	flex-flow:row wrap;
+}
+
+body {
+	background-image: url("../images/pasto.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed
+
+}
+
+header {
+	background:#85d4b7;
+	/* Color de fondo del header */
+	width:100%;
+	padding:20px;
+	/* Flexbox */
+	display: flex;
+	/*flex-start desde un comienzo hasta el final
+	flex-end desde el final al comienzo
+	center 
+	space-between los items son puestos con espacios posteriores
+	space-around items son puestos con espacios antes
+	*/
+	justify-content:space-between;
+	align-items:center;
+	flex-direction:row;/**otra forma de mostrar lo mismo*/
+	flex-wrap:wrap;
+}
+/* Propiedades del Logo  */
+header .logo {
+	color:#fff;
+	font-size:30px;
+	padding: 10px;
+}
+/* Propiedades de las imagenes del logo */
+header .logo img {
+	width:50px;
+	vertical-align: top;
+}
+
+header .logo a {
+	color:#fff;
+	text-decoration: none;
+	line-height:50px;
+}
+/* Propiedades del Menu */
+header nav {
+	width:100%;
+	padding: 10px;
+	/* Flexbox */
+	display:flex;
+	flex-wrap:wrap;
+	align-items:center;
+}
+
+header nav a {
+	background:#6dccaa;
+	color:#fff;
+	text-align: center;
+	text-decoration: none;
+	padding:10px;
+
+	/* Flexbox */
+	flex-grow:1; /*Especifica el numero maximo de items flex que pueden adecuarse en una zona*/
+}
+
+header nav a:hover {
+	background:#16e59c;
+}
+
+.main {
+    background: #fff;
+    padding: 20px;
+    flex: 1 1 70%
+}
+
+.main form {
+   text-align: center;
+}
+
+footer {
+	background:#85d4b7;
+	width: 100%;
+	padding:20px;
+
+	/* Flexbox */
+	display: flex;
+	flex-wrap:wrap;
+	justify-content:space-between;
+}
+
+.validado,aside,footer,footer .links {
+    display: flex;
+    flex-wrap: wrap
+}
+
+.validado {
+    background: #d5d5d5;
+    width: 100%;
+    padding: 10px;
+    justify-content: space-between;
+    text-align: center
+}
+
+ 

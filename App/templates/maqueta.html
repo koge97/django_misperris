@@ -1,0 +1,51 @@
+{% load staticfiles %}
+<html>
+    <head>
+         <!--Hoja de estilos-->
+        <link rel="stylesheet" href="{% static 'css/maqueta.css' %}">
+        <!--Prefix-->
+        <script src="{% static 'js/prefix.js' %}" type="test/javascript"></script>
+    </head>
+    <body>
+            <!-- Division del contenedor de la pagina -->
+            <div class=contenedor>
+            <!-- Header, parte superior de la pagina -->
+            <header>
+                <!-- Logo -->
+                <div class=logo>
+                    <img alt=""src="{% static 'images/logo.png' %}" width=150>
+                    <a href=#>MIS PERRIS</a>
+                </div>
+                <!-- Menu -->
+                <nav>
+                    <a href=#>Inicio</a>
+                    <a href=#>Quienes Somos</a>
+                    <a href=#>Servicios</a>
+                    <a href=#>Contacto</a>
+                </nav>
+            </header>
+            <!-- ^ Fin del Header -->
+            <!-- Division Main1 Primer Articulo -->
+            <div class=main>
+                {% block principal %}
+                {% endblock %}
+            </div>
+            <footer>
+                <!-- Cuadro con Logos de Validaciones CSS y HTML -->
+                <div class=validado>
+                <p>Desarrollo Web y Mobile DWY4101-003D Manuel Yavar</p>
+                <p>
+                <a href="https://validator.w3.org/nu/?doc=http%3A%2F%2F200.111.90.172%2F">
+                <img alt="¡HTML Válido!"src=https://www.w3.org/Icons/valid-html401 style=border:0;width:88px;height:31px>
+                </a>
+                <a href=http://jigsaw.w3.org/css-validator/check/referer>
+                <img alt="¡CSS Válido!"src=http://jigsaw.w3.org/css-validator/images/vcss style=border:0;width:88px;height:31px>
+                </a>
+                </p>
+                </div>
+                <!-- Fin del Pie de Pagina -->
+            </footer>
+            </div>
+    </body>
+</html>
+        
