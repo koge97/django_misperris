@@ -36,14 +36,18 @@ def index(request):
 
 #----------------------------------------------------------------------------------------------------------------------
 
-#Gestion de Usuarios
+#Gestion de Usuarios desde Admin
 def gestionUsuario(request):
     usuarios=User.objects.all()
     form=AgregarUsuario(request.POST)
     if form.is_valid():
         data=form.cleaned_data
         u=User.objects.create_user(data.get("username"),data.get("correo"),data.get("password"))
-        u.is_staff=False
+        var_rol = data.get("rol")
+        if var_rol == "Normal":
+            u.is_staff=False
+        else:
+            u.is_staff=True
         u.save()
         regDB=Usuario(nombre=data.get("nombre"),apellido=data.get("apellido"),fecha=data.get("fecha"),region=data.get("region"),ciudad=data.get("ciudad"),vivienda=data.get("vivienda"),rol=data.get("rol"),user=u)
         regDB.save()
