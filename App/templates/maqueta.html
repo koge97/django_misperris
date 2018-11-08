@@ -18,11 +18,32 @@
                 </div>
                 <!-- Menu -->
                 <nav>
-                    <a href=#>Inicio</a>
-                    <a href=#>Quienes Somos</a>
-                    <a href=#>Servicios</a>
-                    <a href=#>Contacto</a>
+                    <a href=/>Inicio</a>
+                    <a href=/quienes>Quienes Somos</a>
+                    <a href=/servicios>Servicios</a>
+                    <a href=/contacto>Contacto</a>
                 </nav>
+                {% block header %}
+                {% endblock %}
+                {% if request.user.is_authenticated %}
+                {% if user.is_staff %}
+                    <nav> 
+                        <a href="/usuarios/">Gestionar Usuarios</a>
+                        <a href="/aa/">Registrar Mascota</a>
+                        <a href="/salir/">Cerrar Sesión</a>
+                    </nav>
+                {% else %}
+                    <nav>
+                        <a href="/aa/">Adoptar</a>
+                        <a href="/salir/">Cerrar Sesión</a>
+                    </nav>
+                {% endif %}
+            {% else %}
+                <nav>
+                    <a href="/aa/">Registrarse</a>
+                    <a href="/login/">Ingresar</a>
+                </nav>
+            {% endif %}
             </header>
             <!-- ^ Fin del Header -->
             <!-- Division Main1 Primer Articulo -->

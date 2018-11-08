@@ -2,14 +2,17 @@
 {% block principal %}
 <form method="post">
     {% csrf_token %}
-    {{form}}
+    {{form.as_p}}
     <button type="submit">Agregar</button>
 </form>
 {%if usuarios %}
+<br>
+<br>
 <h1>Gestion de Usuarios</h1>
     {%for u in usuarios%}
-    {{u.username}}{{u.email}}
+    <p>Usuario: </p>{{u.username}}
+    <br>
+    <p>Mail: </p>{{u.email}}
     {%endfor%}
 {% endif%}
-<a href="{% url 'salir' %}">Salir</a>
 {% endblock %}

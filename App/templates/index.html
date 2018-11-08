@@ -1,0 +1,47 @@
+{% extends 'maqueta.html' %}
+{% load staticfiles %}
+{% block header %}
+<script src="{% static 'js/jquery.js' %}"></script>
+<script>$(document).ready(function(){$(".bxslider").bxSlider()})</script>
+<script src="{% static 'js/jquery.bxslider.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/jquery.bxslider.css' %}">
+
+<!-- Slider -->
+<div class=bxslider>
+        <img alt="Perrito 1"src="{% static 'images/perro1.jpg' %}">
+        <img alt="Perrito 2"src="{% static 'images/perro2.jpg' %}">
+        <img alt="Perrito OwO"src="{% static 'images/perro3.jpg' %}">
+</div>
+<!-- Botones Redes Sociales -->
+<div class=botones_sociales>
+        <a href=#><img alt=Facebook src="{% static 'images/fb.png' %}"></a>
+        <a href=#><img alt="Google Plus"src="{% static 'images/gugul.png' %}"></a>
+        <a href=#><img alt=Instagram src="{% static 'images/instagram.png' %}"></a>
+        <a href=#><img alt=E-Mail src="{% static 'images/mail.png' %}"></a>
+    </div>
+{% endblock %}
+{% block principal %}
+<div class=main>
+        <article>
+            <h2 class=titulo>Rescate</h2>
+            <p class=p1>Etapa uno</p>
+            <h2 class=titulo>—————</h2>
+            <p class=p1>Rescatamos perros en situacion de peligro y abandono. Los rehabilitamos y los preparamos para conseguirles un nuevo hogar.</p>
+            <img alt="Doge de relleno"src="{% static 'images/dogo.jpg' %}" class=img1 height=150>				
+        </article>
+    </div>
+    <!-- Division Main2 Segundo Articulo -->
+    <div class=main2>
+        <img alt="Platito de Comida"src="{% static 'images/plato.jpg' %}" class=img2 height=150>
+        <article>
+            <h3 class=titulo>Crowdfounding</h3>
+            <p class=p2>Financiamiento</p>
+            <h3 class=titulo>—————</h3>
+            <p class=p2>Sigue nuestras redes sociales para informarte de las diversas campañas y actividades que realizamos para obtener financiamiento para seguir ayudando.</p>
+        </article>
+    </div>
+    <div class=main>
+    <a class="boton" href="#">Campañas</a>
+    </div>
+{% endblock %}
