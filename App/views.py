@@ -1,5 +1,5 @@
 #Importa los formularios AgregarUsuario, LoginForm, RestablecerPassForm, RestablecerPassMail
-from .forms import AgregarUsuario, LoginForm, RestablecerPassForm, RestablecerPassMail, RegUsr
+from .forms import AgregarUsuario, LoginForm, RestablecerPassForm, RestablecerPassMail, RegUsr, AgregarMascota
 #Importa los templates
 from django import template
 #Importa las respuestas Http
@@ -17,7 +17,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 #Convierte el Password de la persona en un Hash SHA256 por default
 from django.contrib.auth.hashers import make_password
-from .models import Usuario
+from .models import Usuario, Mascota
 
 # Aguante StackOverflow
 # Create your views here.
@@ -152,6 +152,7 @@ def deleteuser(request,id):
     placeholder=Usuario.objects.get(id=id)
     if request.method=='POST':
         placeholder.delete()
+        return redirect('clientes')
     return render(request,'deleteuser.html',{'placeholder':placeholder})
 
 #----------------------------------------------------------------------------------------------------------------------
@@ -184,3 +185,28 @@ def regusr(request):
 #NOTA: Despues de lesear como 2 horas por que no me tomaba la tabla Usuario, solo habia que hacer un > python manage.py migrate --run-syncdb
 
 #----------------------------------------------------------------------------------------------------------------------
+
+def regpet(request):
+    pets=Mascota.objects.all()
+    form=AgregarMascota(request.POST, request.FILES)
+    if form.is_valid():
+        data=form.cleaned_data
+        regDB=Mascota(nombre=data.get("nombre"),raza=data.get("raza"),descripcion=data.get("descripcion"),estado=data.get("estado"),pic=request.FILES['pic'])
+        regDB.save()
+    form=AgregarMascota()
+    return render(request,"regpet.html",{'form':form,'pets':pets})
+
+def mngrpets(request):  
+    lista = Mascota.objects.all()
+    return render(request, 'mngrpet.html', {'lista':lista})
+
+def deletepet(request,id):
+    placeholder=Mascota.objects.get(id=id)
+    if request.method=='POST':
+        placeholder.delete()
+        return redirect('mngrpet')
+    return render(request,'deletepet.html',{'placeholder':placeholder})
+
+def adoptpets(request):  
+    lista = Mascota.objects.all()
+    return render(request, 'adoptpet.html', {'lista':lista})

@@ -114,6 +114,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+MEDIA_ROOT=os.path.join(os.path.dirname(BASE_DIR),'MISPERRIS/media')
+
+MEDIA_URL='/media/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

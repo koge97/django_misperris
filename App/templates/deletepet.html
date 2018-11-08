@@ -1,0 +1,19 @@
+{%extends 'maqueta.html'%}
+{%block principal %}
+<form method="post">
+{% csrf_token %}
+<h1>Confirmar eliminacion de la mascota {{placeholder.nombre}}</h1>
+<br>
+<center>
+        <img src={{placeholder.pic.url}} height=150 >
+        <br>
+        <br>
+        <button  type="submit">Si, DESTRUYELO!</button>
+        <br>
+        <br>
+        <br>
+        <br>
+        <a href='http://localhost:8000/mngrpet'>Nah, lo haré mas tarde</a>
+</center>
+</form>
+{% endblock %}

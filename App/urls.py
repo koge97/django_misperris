@@ -11,4 +11,7 @@ urlpatterns=[
     url(r'^changepassword/$',views.changepassword,name="changepassword"),
     url(r'^deleteuser/(?P<id>\d+)/$',views.deleteuser, name="deleteuser"),
     url(r'^regusr/$',views.regusr,name="regusr"),
+    url(r'^regpet/$',views.regpet,name="regpet"),
+    url(r'^mngrpet/$',views.mngrpets, name="mngrpet"),
+    url(r'^deletepet/(?P<id>\d+)/$',views.deletepet, name="deletepet"),
 ]

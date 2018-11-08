@@ -10,7 +10,7 @@ class AgregarUsuario(forms.Form):
     fecha=forms.DateField(widget=forms.SelectDateWidget(years=range(1973,2001)),label="Fecha de Nacimiento")
     region=forms.ChoiceField(choices=(('1', 'RM REGION METROPOLITANA',),),label="Región")
     ciudad=forms.ChoiceField(choices=(('1', 'Ñuñoa la lleva',),),label="Ciudad")
-    vivienda=forms.ChoiceField(choices=(('1', 'Casa con Patio Grande'),('2', 'Casa con Patio Pequeño'),('3', 'Casa sin Patio'),('4', 'Departamento')),label="Vivienda")
+    vivienda=forms.ChoiceField(choices=(('Casa con Patio Grande', 'Casa con Patio Grande'),('Casa con Patio Pequeño', 'Casa con Patio Pequeño'),('Casa sin Patio', 'Casa sin Patio'),('Departamento', 'Departamento')),label="Vivienda")
     rol=forms.ChoiceField(choices=(('Normal', 'Normal'),('Admin','Admin'),),label="Rol del Usuario")
 
 #Registro de Usuario comun y silvestre
@@ -23,7 +23,7 @@ class RegUsr(forms.Form):
     fecha=forms.DateField(widget=forms.SelectDateWidget(years=range(1973,2001)),label="Fecha de Nacimiento")
     region=forms.ChoiceField(choices=(('1', 'RM REGION METROPOLITANA',),),label="Región")
     ciudad=forms.ChoiceField(choices=(('1', 'Ñuñoa la lleva',),),label="Ciudad")
-    vivienda=forms.ChoiceField(choices=(('1', 'Casa con Patio Grande'),('2', 'Casa con Patio Pequeño'),('3', 'Casa sin Patio'),('4', 'Departamento')),label="Vivienda")
+    vivienda=forms.ChoiceField(choices=(('Casa con Patio Grande', 'Casa con Patio Grande'),('Casa con Patio Pequeño', 'Casa con Patio Pequeño'),('Casa sin Patio', 'Casa sin Patio'),('Departamento', 'Departamento')),label="Vivienda")
 
 class LoginForm(forms.Form):
     usr=forms.CharField(widget=forms.TextInput(),label="Nombre de Usuario")
@@ -38,3 +38,9 @@ class RestablecerPassForm(forms.Form):
 class RestablecerPassMail(forms.Form):
     username=forms.CharField(widget=forms.TextInput(),label="Usuario")
 
+class AgregarMascota(forms.Form):
+    pic=forms.ImageField(label="Imagen")
+    nombre=forms.CharField(widget=forms.TextInput(),label="Nombre")
+    raza=forms.CharField(widget=forms.TextInput(),label="Raza")
+    descripcion=forms.CharField(widget=forms.TextInput(),label="Descripcion")
+    estado=forms.ChoiceField(choices=(('Rescatado', 'Rescatado'),('Disponible', 'Disponible'),('Adoptado', 'Adoptado')),label="Estado")
