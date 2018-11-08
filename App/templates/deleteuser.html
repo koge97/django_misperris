@@ -1,0 +1,16 @@
+{%extends 'maqueta.html'%}
+{%block principal %}
+<form method="post">
+{% csrf_token %}
+<h1>Confirmar eliminacion del adoptante {{placeholder.nombre}} {{placeholder.apellido}}</h1>
+<br>
+<center>
+        <button  type="submit">Si, DESTRUYELO!</button>
+        <br>
+        <br>
+        <br>
+        <br>
+        <a href='http://localhost:8000/mngrusr'>Nah, lo haré mas tarde</a>
+</center>
+</form>
+{% endblock %}

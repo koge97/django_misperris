@@ -3,7 +3,7 @@
 {% block principal %}
 {%if lista %}
 <link rel="stylesheet" href="{% static 'css/tabla.css' %}">
-<h1>Gestion de Usuarios</h1>
+<h1>Gestion de Adoptantes</h1>
 <br>
  <table>
 
@@ -13,7 +13,7 @@
     </tr>
     {%for p in lista%}
     <tr>
-            <td>{{p.nombre}}</td><td>{{p.apellido}}</td><td>{{p.fecha}}</td><td>{{p.region}}</td><td>{{p.ciudad}}</td><td>{{p.vivienda}}</td><td>{{p.rol}}</td><td><a href="localhost:8000/borrarusuario">X</a></td>
+            <td>{{p.nombre}}</td><td>{{p.apellido}}</td><td>{{p.fecha}}</td><td>{{p.region}}</td><td>{{p.ciudad}}</td><td>{{p.vivienda}}</td><td>{{p.rol}}</td><td><a href="{% url 'deleteuser' p.id %}">X</a></td>
     
         </tr>
         {%endfor%}
@@ -25,3 +25,6 @@
 {%endif%}
 {%endblock%}
 
+
+
+<!-- <td><a href='localhost:8000/deleteuser?id='>X</a></td> -->

@@ -1,5 +1,5 @@
 #Importa los formularios AgregarUsuario, LoginForm, RestablecerPassForm, RestablecerPassMail
-from .forms import AgregarUsuario, LoginForm, RestablecerPassForm, RestablecerPassMail
+from .forms import AgregarUsuario, LoginForm, RestablecerPassForm, RestablecerPassMail, RegUsr
 #Importa los templates
 from django import template
 #Importa las respuestas Http
@@ -146,3 +146,41 @@ def changepassword(request):
 def clientes(request):  
     lista = Usuario.objects.all()
     return render(request, 'clientes.html', {'lista':lista})
+
+
+def deleteuser(request,id):
+    placeholder=Usuario.objects.get(id=id)
+    if request.method=='POST':
+        placeholder.delete()
+    return render(request,'deleteuser.html',{'placeholder':placeholder})
+
+#----------------------------------------------------------------------------------------------------------------------
+
+#Registro comun y silvestre, un simple copy y paste de lo que hay mas arriba pero con unos detallitos mas sensualones
+def regusr(request):
+    usuarios=User.objects.all()
+    cositas=Usuario.objects.all()
+    form=RegUsr(request.POST)
+    if form.is_valid():
+        data=form.cleaned_data
+        #Aqui va a crear el usuario con los tres parametros principales
+        u=User.objects.create_user(data.get("username"),data.get("correo"),data.get("password"))
+        #define la variable var_rol como lo que tenga el rol
+        var_rol="Normal"
+        #Si el rol es normal pues la cuenta que este creando no es staff/admin/superusuario o como le digas
+        if var_rol == "Normal":
+            u.is_staff=False
+            #Si es cualquier otra cosa (Que solo puede ser admin asdasjdasd) sera staff
+        else:
+            u.is_staff=True
+            #Aqui guarda el usuario
+        u.save()
+        #Aqui obtiene el resto de datos para meterlos en la tabla usuario
+        regDB=Usuario(nombre=data.get("nombre"),apellido=data.get("apellido"),fecha=data.get("fecha"),region=data.get("region"),ciudad=data.get("ciudad"),vivienda=data.get("vivienda"),user=u)
+        #Y aqui los guarda c:
+        regDB.save()
+    form=RegUsr()
+    return render(request,"regusr.html",{'form':form,'usuarios':usuarios,'cositas':cositas})
+#NOTA: Despues de lesear como 2 horas por que no me tomaba la tabla Usuario, solo habia que hacer un > python manage.py migrate --run-syncdb
+
+#----------------------------------------------------------------------------------------------------------------------
