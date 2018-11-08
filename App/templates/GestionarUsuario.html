@@ -5,14 +5,4 @@
     {{form.as_p}}
     <button type="submit">Agregar</button>
 </form>
-{%if usuarios %}
-<br>
-<br>
-<h1>Gestion de Usuarios</h1>
-    {%for u in usuarios%}
-    <p>Usuario: </p>{{u.username}}
-    <br>
-    <p>Mail: </p>{{u.email}}
-    {%endfor%}
-{% endif%}
 {% endblock %}

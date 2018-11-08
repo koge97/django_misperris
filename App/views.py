@@ -36,6 +36,7 @@ def index(request):
 #Gestion de Usuarios desde Admin
 def gestionUsuario(request):
     usuarios=User.objects.all()
+    cositas=Usuario.objects.all()
     form=AgregarUsuario(request.POST)
     if form.is_valid():
         data=form.cleaned_data
@@ -56,7 +57,7 @@ def gestionUsuario(request):
         #Y aqui los guarda c:
         regDB.save()
     form=AgregarUsuario()
-    return render(request,"GestionarUsuario.html",{'form':form,'usuarios':usuarios})
+    return render(request,"GestionarUsuario.html",{'form':form,'usuarios':usuarios,'cositas':cositas})
 #NOTA: Despues de lesear como 2 horas por que no me tomaba la tabla Usuario, solo habia que hacer un > python manage.py migrate --run-syncdb
 
 #----------------------------------------------------------------------------------------------------------------------
@@ -141,3 +142,7 @@ def changepassword(request):
         return render(request,"changepassword.html",{'form':form, 'username':username, 'msgbox':msgbox})
     else:
         return redirect('/login/')
+
+def clientes(request):  
+    lista = Usuario.objects.all()
+    return render(request, 'clientes.html', {'lista':lista})
