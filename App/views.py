@@ -19,10 +19,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from .models import Usuario
 
-#Aguante StackOverflow
+# Aguante StackOverflow
 # Create your views here.
-
-
 
 #----------------------------------------------------------------------------------------------------------------------
 
@@ -33,7 +31,6 @@ def index(request):
     contexto={'titulo':"Index",}
     return HttpResponse(pantalla.render(contexto,request))
 
-
 #----------------------------------------------------------------------------------------------------------------------
 
 #Gestion de Usuarios desde Admin
@@ -42,14 +39,21 @@ def gestionUsuario(request):
     form=AgregarUsuario(request.POST)
     if form.is_valid():
         data=form.cleaned_data
+        #Aqui va a crear el usuario con los tres parametros principales
         u=User.objects.create_user(data.get("username"),data.get("correo"),data.get("password"))
+        #define la variable var_rol como lo que tenga el rol
         var_rol = data.get("rol")
+        #Si el rol es normal pues la cuenta que este creando no es staff/admin/superusuario o como le digas
         if var_rol == "Normal":
             u.is_staff=False
+            #Si es cualquier otra cosa (Que solo puede ser admin asdasjdasd) sera staff
         else:
             u.is_staff=True
+            #Aqui guarda el usuario
         u.save()
+        #Aqui obtiene el resto de datos para meterlos en la tabla usuario
         regDB=Usuario(nombre=data.get("nombre"),apellido=data.get("apellido"),fecha=data.get("fecha"),region=data.get("region"),ciudad=data.get("ciudad"),vivienda=data.get("vivienda"),rol=data.get("rol"),user=u)
+        #Y aqui los guarda c:
         regDB.save()
     form=AgregarUsuario()
     return render(request,"GestionarUsuario.html",{'form':form,'usuarios':usuarios})
@@ -59,17 +63,17 @@ def gestionUsuario(request):
 
 #Login
 def ingresar(request):
+    #Bueno, en esta parte le esta diciendo que pesque el LoginForm
     form=LoginForm(request.POST or None)
+    #Si el form es valido va a hacer...
     if form.is_valid():
         data=form.cleaned_data
+        #Va a autenticar los valores de usr y passwd y si no pos nada por que no hay un else xd
         user=authenticate(username=data.get("usr"),password=data.get("passwd"))
         if user is not None:
             login(request, user)
             return redirect('gestionUsuario')
     return render(request,"login.html",{'form':form})
-
-
-
 
 #----------------------------------------------------------------------------------------------------------------------
 
@@ -81,8 +85,6 @@ def salir(request):
     return redirect("/")
 
 #----------------------------------------------------------------------------------------------------------------------
-
-
 
 #Enviar Mail para cambiar contraseña
 def recovery(request):
@@ -109,12 +111,7 @@ def recovery(request):
         confirmacion='Se enviaron las instrucciones para restablecer la contraseña a '+user.email
         #Si todo sale ok te devuelve al formulario pero con el mensaje de arriba confirmado que se envio el mail, si no, pues anda a rezarle a la virgencita que algo pasa
     return render(request,"passwdrcv.html",{'form':form, 'confirmacion':confirmacion})
-
-
-
 #----------------------------------------------------------------------------------------------------------------------
-
-
 
 #Restablecer Contraseña
 def changepassword(request):
