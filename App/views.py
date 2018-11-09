@@ -109,41 +109,31 @@ def salir(request):
 def recovery(request):
     form=RestablecerPassMail(request.POST or None)
     #Horas buscando por quer me daba error la variable del mensaje de confirmacion y tenia que meterle algun relleno :/
-    confirmacion="hola soy un relleno owo"
     #Si el formulario es valido hace el get del username y manda un sensual correo a la direccion que tenga guardada esta cosa a travez del send_mail
     #Estuve hasta las 4AM tratando de hacer que funcionara y despues me di cuenta que tenia mal escrito el snmp de Google pal Gmail :D (De hecho creo que lo escribi mal de nuevo xd)
     if form.is_valid():
         data=form.cleaned_data
-        user=User.objects.get(username=data.get("username"))
+        usuario=User.objects.get(username=data.get("username"))
         send_mail(
-                'Recuperación de contraseña',
-                #Why not? Sus escuadrones del Fortnite? Lobuno? Ok no.
+                'Recuperar Password',
+                #Juguemos Fortnite? Okno.
                 'Me gusta el Fortnite lo juego todo el dia esto no es Minecraft me encanta es muy bueno',
                 #Aguanten las Guias de Django y StackOverflow, no se que hace esto pero funciona.
                 'from@example.com',
                 #Esto pide el mail con el que el usuario se registro
-                [user.email],
+                [usuario.email],
                 #Y aqui va el mensaje, que maravilla verdad?
-                html_message = 'Pinchando el siguiente <a href="http://localhost:8000/changepassword?user='+user.username+'">enlace</a> podras restablecer tu contraseña',
+                html_message='Pinchando el siguiente <a href="http://localhost:8000/changepassword?user='+usuario.username+'">enlace</a> podras restablecer tu contraseña',
             )
-            #Y aqui va la confirmacion, super magica
-        confirmacion='Se enviaron las instrucciones para restablecer la contraseña a '+user.email
+        return redirect('login')
         #Si todo sale ok te devuelve al formulario pero con el mensaje de arriba confirmado que se envio el mail, si no, pues anda a rezarle a la virgencita que algo pasa
-    return render(request,"passwdrcv.html",{'form':form, 'confirmacion':confirmacion})
+    return render(request,"passwdrcv.html",{'form':form})
 #----------------------------------------------------------------------------------------------------------------------
 
 #Restablecer Contraseña
 def changepassword(request):
     form=RestablecerPassForm(request.POST or None)
-    #Tengo que definir la variable msgbox antes con algun relleno o algo por que si no me da error, ya lo dije arriba :)
-    msgbox=""
-    #Pues aqui pide que intente recuperar el usuario
-    try:
-        username=request.GET["user"]
-    except Exception as cosa:
-        #Excepto cuando el nombre de usuario esta vacio o no coincide
-        username= None
-        #Si el nombre de usuario coincide bien pues continua a todo el chiche para restablecer la contraseña
+    username=request.GET["user"]
     if username is not None:
         if form.is_valid():
             data=form.cleaned_data
@@ -151,13 +141,10 @@ def changepassword(request):
             if data.get("nuevapass") == data.get("nuevapasscheck"):
                 passwd=make_password(data.get("nuevapasscheck"))
                 User.objects.filter(username=username).update(password=passwd)
-                msgbox="Contraseña cambiada exitosamente"
                 #Te recomiendo anotarla en un papel para la proxima vez
-            else:
-                #Si no, te dice que no coincide y se arma la 3°a guerra termonueclear en tu PC
-                msgbox="Las contraseñas deben coincidir, intentelo de nuevo"
-                #Y como de costumbre, si todo sale  bkn te devuelve a la pagina y con el mesajito que te hace sentir satisfactorio en esta vida
-        return render(request,"changepassword.html",{'form':form, 'username':username, 'msgbox':msgbox})
+                #Y como de costumbre, si todo sale  bkn te devuelve a la pagina del login
+                return redirect('/login/')
+        return render(request,"changepassword.html",{'form':form, 'username':username})
     else:
         return redirect('/login/')
 

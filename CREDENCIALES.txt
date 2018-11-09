@@ -1,0 +1,18 @@
+--------------------------
+-CREDENCIALES MIS PERRIS -
+--------------------------
+
+Usuario normal (adoptante):
+
+Usuario: normal
+Clave: 123456
+
+::::::::::::::::::::::::::::
+
+Usuario administrador (con privilegios):
+
+Usuario: administrador
+Clave: 123456
+
+
+Para probar el envio de correos, crear un nuevo usuario con algun correo que se tenga acceso.
