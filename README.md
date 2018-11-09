@@ -8,3 +8,6 @@ Este trabajo se basa en el modelo vista template de django y incluye las siguien
 -Registro de Mascotas y de Usuarios con privilegios
 -Envio de Mail para restablecer contraseña
 -Etc
+
+
+CREDENCIALES: /// user: normal  passwd: 123456 /// user: administrador  passwd: 123456 ///
