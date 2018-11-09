@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% block principal %}
 <link rel="stylesheet" href="{% static 'css/tabla.css' %}">
-<h1>Gestion de Mascotas</h1>
+<h1>Adoptar una Mascota</h1>
 <br>
 {%if mascotas %}
 <table>
@@ -13,8 +13,7 @@
         <th>Descripcion</th>
         <th>Estado</th>
         <th>Foto</th>
-        <th><img src="{% static 'images/editar.png' %}" height=15></th>
-        <th><img src="{% static 'images/basura.png' %}" height=15></th>
+        <th><img src="{% static 'images/adoptar.png' %}" height=25></th>
     </tr>
     {% for m in mascotas.object_list %}
     <tr>
@@ -24,8 +23,7 @@
         <td>{{ m.descripcion }}</td>
         <td>{{ m.estado }}</td>
         <td><a href={{m.pic.url}}><img src={{m.pic.url}} height=150 ></a></td>
-        <td><a href="{% url 'editpet' m.id %}"><img src="{% static 'images/editar.png' %}" height=15 ></a></td>
-        <td><a href="{% url 'deletepet' m.id %}"><img src="{% static 'images/basura.png' %}" height=15 ></a></td>
+        <td><a href="#"><img src="{% static 'images/adoptar.png' %}" height=25 ></a></td>
     </tr>
     {% endfor %}
 </table>

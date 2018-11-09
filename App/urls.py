@@ -14,4 +14,6 @@ urlpatterns=[
     url(r'^regpet/$',views.regpet,name="regpet"),
     url(r'^mngrpet/$',views.mngrpets, name="mngrpet"),
     url(r'^deletepet/(?P<id>\d+)/$',views.deletepet, name="deletepet"),
+    url(r'^adoptpet/$',views.adoptpets, name="adoptpet"),
+    url(r'^editpet/(?P<id>\d+)/$',views.petupdate, name="editpet"),
 ]

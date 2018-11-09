@@ -2,11 +2,10 @@
 {% load staticfiles %}
 {% block principal %}
 <link rel="stylesheet" href="{% static 'css/tabla.css' %}">
-<h1>Registrar Mascota</h1>
-<br>
+<h1>Editando la Mascota {{regDB.nombre}}</h1>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{form.as_p}}
-    <button type="submit">Agregar</button>
+    <button type="submit">Guardar Cambios</button>
 </form>
 {% endblock %}

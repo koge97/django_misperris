@@ -1,8 +1,12 @@
 {% extends 'maqueta.html' %}
+{% load staticfiles %}
 {% block principal %}
+<link rel="stylesheet" href="{% static 'css/tabla.css' %}">
+<h1>Registrar Usuario</h1>
+<br>
 <form method="post">
     {% csrf_token %}
-    {{form.as_table}}
+    {{form.as_p}}
     <button type="submit">Agregar</button>
 </form>
 {% endblock %}
