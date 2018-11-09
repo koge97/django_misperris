@@ -24,7 +24,7 @@ class RegUsr(forms.Form):
     region=forms.ChoiceField(choices=(('1', 'RM REGION METROPOLITANA',),),label="Región")
     ciudad=forms.ChoiceField(choices=(('1', 'Ñuñoa la lleva',),),label="Ciudad")
     vivienda=forms.ChoiceField(choices=(('Casa con Patio Grande', 'Casa con Patio Grande'),('Casa con Patio Pequeño', 'Casa con Patio Pequeño'),('Casa sin Patio', 'Casa sin Patio'),('Departamento', 'Departamento')),label="Vivienda")
-
+#Login? xD
 class LoginForm(forms.Form):
     usr=forms.CharField(widget=forms.TextInput(),label="Nombre de Usuario")
     passwd=forms.CharField(widget=forms.PasswordInput(),label="Contraseña")
@@ -37,7 +37,7 @@ class RestablecerPassForm(forms.Form):
 #Mail Restablece Contraseña
 class RestablecerPassMail(forms.Form):
     username=forms.CharField(widget=forms.TextInput(),label="Usuario")
-
+#Agrega las mascotas
 class AgregarMascota(forms.Form):
     pic=forms.ImageField(label="Imagen")
     nombre=forms.CharField(widget=forms.TextInput(),label="Nombre")

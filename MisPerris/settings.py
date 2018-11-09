@@ -114,8 +114,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+#Con esto puede identificar las imagenes que pasan por la DB
 MEDIA_ROOT=os.path.join(os.path.dirname(BASE_DIR),'MISPERRIS/media')
-
+#Direccion de los medios
 MEDIA_URL='/media/'
 
 # Static files (CSS, JavaScript, Images)
@@ -123,7 +124,7 @@ MEDIA_URL='/media/'
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-# DATOS CORREO
+# Aqui van puestos los datos del correo, por idiotez mia me equivoque y habia puesto mal el puerto xD
 EMAIL_USE_SSL=False
 EMAIL_USE_TLS=True
 EMAIL_HOST='smtp.gmail.com'

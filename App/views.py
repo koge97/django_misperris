@@ -19,6 +19,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from .models import Usuario, Mascota
 from django.core.paginator import Paginator
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 # Create your views here.
@@ -42,6 +43,8 @@ def index(request):
 #----------------------------------------------------------------------------------------------------------------------
 
 #Gestion de Usuarios desde Admin
+@login_required(login_url="login")
+@staff_member_required
 def gestionUsuario(request):
     #Aqui meteremos los usuarios
     usuarios=User.objects.all()
@@ -93,6 +96,7 @@ def ingresar(request):
 #----------------------------------------------------------------------------------------------------------------------
 
 #Salir
+@login_required(login_url="login")
 def salir(request):
     #Creo que es algo logico lo que hace no? bueno, sin no se entiende, hace el request del logout
     logout(request)
@@ -159,6 +163,8 @@ def changepassword(request):
 
 #----------------------------------------------------------------------------------------------------------------------
 #Esta parte nos va a listar los adoptantes, me dio paja cambiarle el nombre de clientes por que era una prueba inicial y pos se quedo asi
+@login_required(login_url="login")
+@staff_member_required
 def clientes(request):  
     #Pescamos todos los usuarios y los metemos a la lista y era
     lista = Usuario.objects.all()
@@ -169,6 +175,8 @@ def clientes(request):
 
 #Aqui eliminaremos clientes, gracias jorge por la ayuda xd
 #Tenemos que pedir el ID en el request
+@login_required(login_url="login")
+@staff_member_required
 def deleteuser(request,id):
     #Luego en el get pedimos el id igual y se lo pasamos al placeholder
     placeholder=Usuario.objects.get(id=id)
@@ -182,6 +190,7 @@ def deleteuser(request,id):
 #----------------------------------------------------------------------------------------------------------------------
 
 #Registro comun y silvestre, un simple copy y paste de lo que hay mas arriba pero con unos detallitos mas sensualones
+
 def regusr(request):
     usuarios=User.objects.all()
     cositas=Usuario.objects.all()
@@ -212,6 +221,8 @@ def regusr(request):
 #----------------------------------------------------------------------------------------------------------------------
 
 #Registra una mascota
+@login_required(login_url="login")
+@staff_member_required
 def regpet(request):
     #Pescamos todos los objetos de la tabla mascota y los metemos en pets
     pets=Mascota.objects.all()
@@ -238,6 +249,8 @@ def regpet(request):
 #----------------------------------------------------------------------------------------------------------------------
 
 #LO MISMO DE ARRIBA PA ELIMINAR GENTE PERO AHORA ELIMINAMOS MASCOTAS >:C    ̶(E̶N̶ ̶V̶E̶Z̶ ̶D̶E̶ ̶E̶L̶I̶M̶I̶N̶A̶R̶ ̶S̶E̶R̶E̶S̶ ̶H̶U̶M̶A̶N̶O̶S̶)
+@login_required(login_url="login")
+@staff_member_required
 def deletepet(request,id):
     placeholder=Mascota.objects.get(id=id)
     if request.method=='POST':
@@ -253,6 +266,8 @@ def deletepet(request,id):
 #     lista = Mascota.objects.all()
 #     return render(request, 'adoptpet.html', {'lista':lista})
 
+#PAGINATOR PARA ADOPTAR PETS
+@login_required(login_url="login")
 def adoptpets(request):  
     form=AgregarMascota(request.POST or None)
     if form.is_valid():
@@ -275,7 +290,10 @@ def adoptpets(request):
     contexto={"mascotas":mascotas,"form":form}
     return render(request,'adoptpet.html',contexto)
 #----------------------------------------------------------------------------------------------------------------------
-
+#Actualizar una mascotas
+#Tomamos los datos con el POST y los metemos de nuevo c:
+@login_required(login_url="login")
+@staff_member_required
 def petupdate(request,id):
     regDB=Mascota.objects.get(id=id)
     if request.method=="POST":
@@ -300,7 +318,9 @@ def petupdate(request,id):
     return render(request, "editpet.html", {"form":form})
 
 #----------------------------------------------------------------------------------------------------------------------
-
+#Otro paginator mas
+@login_required(login_url="login")
+@staff_member_required
 def mngrpets(request):  
     form=AgregarMascota(request.POST or None)
     if form.is_valid():
@@ -322,5 +342,6 @@ def mngrpets(request):
     
     contexto={"mascotas":mascotas,"form":form}
     return render(request,'mngrpet.html',contexto)
-
 #----------------------------------------------------------------------------------------------------------------------
+
+#Ya me dio flojera seguir comentando

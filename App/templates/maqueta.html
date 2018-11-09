@@ -19,12 +19,13 @@
                 <!-- Menu -->
                 <nav>
                     <a href=/>Inicio</a>
-                    <a href=/quienes>Quienes Somos</a>
-                    <a href=/servicios>Servicios</a>
-                    <a href=/contacto>Contacto</a>
+                    <a href=/#>Quienes Somos</a>
+                    <a href=/#>Servicios</a>
+                    <a href=/#>Contacto</a>
                 </nav>
                 {% block header %}
                 {% endblock %}
+                <!-- Si el usuario esta autenticado y es staff muestra un menu, si no es staff muestra otro y si no esta logeado otro -->
                 {% if request.user.is_authenticated %}
                 {% if user.is_staff %}
                     <nav> 
@@ -54,6 +55,8 @@
                 {% endblock %}
             </div>
             <footer>
+            {% block footer %}
+            {% endblock %}
                 <!-- Cuadro con Logos de Validaciones CSS y HTML -->
                 <div class=validado>
                 <p>Desarrollo Web y Mobile DWY4101-003D Manuel Yavar</p>

@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% block header %}
 <script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
 <script>$(document).ready(function(){$(".bxslider").bxSlider()})</script>
 <script src="{% static 'js/jquery.bxslider.min.js' %}"></script>
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
@@ -44,4 +45,22 @@
     <div class=main>
     <a class="boton" href="#">Campañas</a>
     </div>
+{% endblock %}
+{% block footer %}
+			<!-- Cajas con imagenes de Perritos -->
+			<div class=contenedor1>	
+                    <div class=caja>
+                        <img alt=Oso src="{% static 'images/perro_bajo1.jpg' %}">
+                        <img alt=Maya src="{% static 'images/perro_bajo2.jpg' %}">
+                        <img alt=WiFi src="{% static 'images/perro_bajo3.jpg' %}">
+                    </div>
+                    <div class="caja largo">
+                        <img alt=Chocolate src="{% static 'images/perro_bajo4.jpg' %}">
+                        <img alt=Pexel src="{% static 'images/perro_bajo5.jpg' %}">
+                    </div>
+                    <div class=caja>
+                        <img alt=Bigotes src="{% static 'images/perro_bajo6.jpg' %}" style=height:62%>
+                        <img alt=Luna src="{% static 'images/perro_bajo7.jpg' %}">
+                    </div>
+                    </div>
 {% endblock %}
